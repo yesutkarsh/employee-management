@@ -1,6 +1,6 @@
 import { AuthProvider } from "./AuthProvider";
 import "./globals.css";
-
+import Navabr from "../components/Navbar";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -10,6 +10,7 @@ export default function RootLayout({
     <AuthProvider>
     <html lang="en">
       <body>
+      <Navabr />
         {children}
       </body>
     </html>

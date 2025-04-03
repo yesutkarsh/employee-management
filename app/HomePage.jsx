@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
-export default function page() {
+export default function HomePage() {
   return (
     <>
        <section className="relative h-screen overflow-hidden py-20 md:py-28 ">

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import style from "./page.module.css"
 import ProfileModal from "@/components/ProfileModal"
 
-export default function HRDashboard() {
+export default function ManageEmployee() {
     const [employees, setEmployees] = useState([])
     const [profileModal, setProfileModal] = useState(false)
     const [selectedEmployee, setSelectedEmployee] = useState(null)
@@ -71,7 +71,7 @@ export default function HRDashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {employees.length>1 && employees.map((employee) => (
+                            {employees.length>0 && employees.map((employee) => (
                                 <tr key={employee.employeeId} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {employee.fullName}

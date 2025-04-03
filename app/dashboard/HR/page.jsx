@@ -1,7 +1,7 @@
 import React from 'react'
-import ApproveEmployee from "./Approve"
+import ManageEmployee from "./ManageEmployee"
 export default function page() {
   return (
-    <ApproveEmployee/>
+    <ManageEmployee/>
   )
 }

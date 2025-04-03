@@ -1,7 +1,7 @@
 import React from 'react'
-import ApproveEmployee from "./Approve"
+import Profile from "./Profile"
 export default function page() {
   return (
-    <ApproveEmployee/>
+    <Profile/>
   )
 }

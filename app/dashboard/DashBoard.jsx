@@ -3,7 +3,7 @@ import WaitingApproval from "../../components/WaitingApproval";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from 'next/link';
 
-export default async function Page() {
+export default async function DashBoard() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const fullName = user?.given_name + " " + user?.family_name;
@@ -69,23 +69,7 @@ export default async function Page() {
   const isAuthenticated = employeeData.exists && employeeData.status === "approved";
 
   if (!isAuthenticated) {
-    return <WaitingApproval name={fullName} email={email} />;
-  }
-
-  async function checkRole() {
-    try {
-      const res = await fetch('http://localhost:3000/api/role', {
-        method: "GET",
-        headers: {
-          'email': email
-        }
-      });
-      const data = await res.json();
-      return data.role;
-    } catch (error) {
-      console.error("Error checking role:", error);
-      return null;
-    }
+    return <WaitingApproval email={email} name={fullName} />;
   }
 
 

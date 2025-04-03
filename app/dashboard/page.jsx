@@ -1,7 +1,7 @@
 import React from 'react'
-import ApproveEmployee from "./Approve"
+import DashBoard from "./DashBoard"
 export default function page() {
   return (
-    <ApproveEmployee/>
+    <DashBoard/>
   )
 }

@@ -33,7 +33,7 @@ const UserApprovalModal = ({ user, isOpen, onClose }) => {
 
     try {
 
-      fetch('http://localhost:3000/api/employee/pending',{
+      fetch('/api/employee/pending',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -41,6 +41,7 @@ const UserApprovalModal = ({ user, isOpen, onClose }) => {
         body:JSON.stringify(docToInsert)
       })  
       onClose();
+      window.location.href = "/dashboard/HR/approve";
     } catch (error) {
       alert("Error approving user: " + error.message);
     } finally {

@@ -5,16 +5,25 @@ export async function middleware(request) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (user) {
-        // Redirect authenticated users to the dashboard
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-    } else {
-        // Redirect unauthenticated users to home
-        return NextResponse.redirect(new URL('/home', request.url));
+    // Example of protected routes that require authentication
+    const protectedRoutes = ['/dashboard', '/profile', '/settings'];
+    const path = request.nextUrl.pathname;
+    
+    // If accessing a protected route without being logged in
+    if (!user && protectedRoutes.some(route => path.startsWith(route))) {
+        return NextResponse.redirect(new URL('/', request.url));
     }
+    
+    // If accessing authentication pages while already logged in
+    if (user && (path === '/login' || path === '/signup')) {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+    
+    // For all other cases, allow the request to proceed
+    return NextResponse.next();
 }
 
-// Apply middleware to all pages or specific routes
+// Apply middleware to all pages
 export const config = {
-    matcher: '/about/:path*',  // Change this to "/" to apply globally or specific pages
+    matcher: '/((?!api|_next/static|_next/image|favicon.ico).*)',
 };
