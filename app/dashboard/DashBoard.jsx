@@ -12,7 +12,7 @@ export default async function DashBoard() {
   // Check employee status and get the status value
   const checkEmployeeStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/employee/all`, {
+      const response = await fetch(`https://m16project.vercel.app/api/employee/all`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export default async function DashBoard() {
   // Request access if employee doesn't exist
   async function requestAccess() {
     try {
-      const response = await fetch('http://localhost:3000/api/employee/request', {
+      const response = await fetch('https://m16project.vercel.app/api/employee/request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
