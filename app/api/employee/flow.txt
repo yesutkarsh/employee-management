@@ -1,0 +1,13 @@
+requestEmployee:
+employee request for geting access
+
+
+getEmplyee :
+return full info of employee
+
+
+setEmployee
+set the employee 
+
+editEmployee
+edit details of employees
