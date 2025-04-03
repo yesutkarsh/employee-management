@@ -1,6 +1,5 @@
 "use client"
 // app/admin/pending-users/page.js
-import Link from "next/link";
 import UserApprovalModal from "./ApproveCard";
 import { useEffect, useState } from "react";
 
@@ -43,7 +42,7 @@ fetchAllPedningUsers()
           <p className="text-gray-600 text-center">No pending users found.</p>
         ) : (
           <div className="space-y-4">
-            {pendingUsers.map((user) => (
+            {pendingUsers.length>0 && pendingUsers.map((user) => (
               <div
                 key={user._id}
                 className="flex items-center justify-between bg-indigo-50 rounded-lg p-4 hover:bg-indigo-100 transition-colors duration-200"
