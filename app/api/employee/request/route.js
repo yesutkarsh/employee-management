@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 
 
 //  request for employee signup
-export async function POST(req) {
+export async function POST() {
     try{
         const headerList = await headers()
         const email = headerList.get('email')

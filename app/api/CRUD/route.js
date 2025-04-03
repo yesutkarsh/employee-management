@@ -37,6 +37,7 @@ export async function POST() {
       try {
         data = JSON.parse(dataHeader);
       } catch (e) {
+        console.log(e)
         return NextResponse.json({ message: "Invalid data format" }, { status: 400 });
       }
 

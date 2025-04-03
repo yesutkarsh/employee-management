@@ -12,14 +12,14 @@ export default function HRDashboard() {
 
     async function getAllEmployee(){
         try {
-            let response = await fetch('/api/employee/all', {
+            const response = await fetch('/api/employee/all', {
                 cache: 'no-store',
                 headers: {
                     'pragma': 'no-cache',
                     'cache-control': 'no-cache'
                 }
             })
-            let data = await response.json()
+            const data = await response.json()
             console.log("Fetched employee data:", data)
             setEmployees(data)
         } catch (error) {

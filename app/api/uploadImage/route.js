@@ -11,13 +11,7 @@ cloudinary.config({
 });
 
 // Helper function to convert request body to buffer
-async function buffer(readable) {
-  const chunks = [];
-  for await (const chunk of readable) {
-    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-  }
-  return Buffer.concat(chunks);
-}
+
 
 // Helper function to upload to Cloudinary
 function uploadToCloudinary(buffer) {

@@ -1,9 +1,6 @@
 "use client"
 import React from 'react'
 
-import { useEffect, useState, useRef } from "react"
-import { ArrowRight, ChevronRight, Printer, Zap, CreditCard, CheckCircle, Star, Users, Award } from "lucide-react"
-import Link from 'next/link'
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
 export default function page() {
   return (

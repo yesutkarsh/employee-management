@@ -66,7 +66,6 @@ export default async function Page() {
   }
 
   // Determine if user should see waiting approval or authenticated content
-  const isPending = employeeData.exists && employeeData.status === "pending";
   const isAuthenticated = employeeData.exists && employeeData.status === "approved";
 
   if (!isAuthenticated) {
@@ -89,7 +88,6 @@ export default async function Page() {
     }
   }
 
-  const role = await checkRole();
 
   return (
     <>
