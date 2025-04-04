@@ -1,17 +1,13 @@
-// File: app/api/upload-image/route.js
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { Readable } from 'stream';
 
 // Configure Cloudinary with credentials
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'printify',
-  api_key: process.env.CLOUDINARY_API_KEY || '526599637698489',
-  api_secret: process.env.CLOUDINARY_API_SECRET || 'udLIF_leYaKzlofLesI0OJ8UiWg'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
-
-// Helper function to convert request body to buffer
-
 
 // Helper function to upload to Cloudinary
 function uploadToCloudinary(buffer) {
@@ -37,6 +33,7 @@ function uploadToCloudinary(buffer) {
 export async function POST(request) {
   try {
     const contentType = request.headers.get('content-type') || '';
+    console.log('Content-Type:', contentType); // Debug log
     
     if (!contentType.includes('multipart/form-data')) {
       return NextResponse.json(
@@ -49,9 +46,31 @@ export async function POST(request) {
     const formData = await request.formData();
     const file = formData.get('file');
     
+    console.log('File received:', file ? 'Yes' : 'No'); // Debug log
+    console.log('File type:', file?.type); // Debug log
+    console.log('File size:', file?.size); // Debug log
+    
     if (!file) {
       return NextResponse.json(
         { message: 'No file provided' },
+        { status: 400 }
+      );
+    }
+    
+    // Add file validation
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { message: 'File size exceeds 5MB limit' },
+        { status: 400 }
+      );
+    }
+    
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      return NextResponse.json(
+        { message: 'Invalid file type. Only JPEG, PNG and WebP are allowed' },
         { status: 400 }
       );
     }
@@ -71,10 +90,27 @@ export async function POST(request) {
     });
     
   } catch (error) {
-    console.error('Error uploading to Cloudinary:', error);
+    console.error('Detailed error:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
+    // More specific error messages
+    if (error.message.includes('rate limit')) {
+      return NextResponse.json(
+        { message: 'Upload rate limit exceeded', error: error.message },
+        { status: 429 }
+      );
+    }
+    
     return NextResponse.json(
-      { message: 'Error uploading image', error: error.message },
-      { status: 500 }
+      { 
+        message: 'Error uploading image', 
+        error: error.message,
+        details: error.stack // Adding stack trace to response
+      },
+      { status: error.http_code || 500 }
     );
   }
 }

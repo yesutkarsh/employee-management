@@ -102,8 +102,8 @@ export default function Profile() {
       const formData = new FormData();
       formData.append('file', file);
       
-      // Send to your server-side API endpoint
-      const response = await fetch('/api/uploadImage', {
+      // Send to your server-side API endpoint (corrected URL)
+      const response = await fetch('/api/upload-image', {
         method: 'POST',
         body: formData
       });
