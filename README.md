@@ -5,11 +5,13 @@ Clone the repository and run the following commands:
 
 
 ## Run Locally
-(*Require kinde auth API & Mongo DB String for DB Operations)
+#### (*Require kinde auth API & Mongo DB String for DB Operations)
 
 
 
 .env.local (put this in root folder)
+
+```sh
 KINDE_CLIENT_ID=""
 KINDE_CLIENT_SECRET=""
 KINDE_ISSUER_URL=""
@@ -20,7 +22,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster0.wpx5n08.mongodb.net/employe
 CLOUDINARY_CLOUD_NAME=""
 CLOUDINARY_API_KEY=""
 CLOUDINARY_API_SECRET=""
-
+``` 
 
 
 
